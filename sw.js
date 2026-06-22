@@ -2,7 +2,7 @@
 // v6 : postMessage aux clients pour forcer le rechargement quand une nouvelle version s'installe.
 // Même principe qu'AIM : cache-first, purge des anciens caches à l'activation.
 
-const CACHE_NAME = 'jan-v6';
+const CACHE_NAME = 'jan-v7';
 const ASSETS = [
   './',
   './index.html',

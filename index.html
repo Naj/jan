@@ -215,10 +215,115 @@ body.offline .offline-banner{display:block}
 .trophy-desc{font-size:12px;color:#aa8095;margin-top:3px;line-height:1.4}
 .trophy-status{font-size:12px;font-weight:800;margin-top:6px}
 .trophy-status.ok{color:#1d8a40}.trophy-status.nok{color:#c0a0b0}
+/* BADGE CATEGORIES — conteneur vertical, pas de grille */
+.badges-container{padding-bottom:24px;display:flex;flex-direction:column;gap:0;}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE — 3 breakpoints
+═══════════════════════════════════════════ */
+
+/* ── 600px : petite tablette / grand smartphone ── */
 @media(min-width:600px){
-  .modules-grid{grid-template-columns:repeat(3,1fr)}.module-card.dic{grid-column:auto}
-  .question-text{font-size:24px}.answer-btn{font-size:19px;padding:20px;min-height:70px}
-  .badges-grid{grid-template-columns:repeat(3,1fr)}.phono-word{font-size:54px}
+  /* Layout */
+  .screen{max-width:640px;padding:20px 20px 110px;}
+  /* Modules */
+  .modules-grid{grid-template-columns:repeat(3,1fr);gap:16px;}
+  .module-card.dic{grid-column:auto;}
+  .module-icon{font-size:42px;}
+  /* Questions */
+  .question-text{font-size:24px;}
+  .answer-btn{font-size:19px;padding:20px;min-height:72px;}
+  /* Badges */
+  .badges-grid{grid-template-columns:repeat(3,1fr);}
+  /* Phonologie */
+  .phono-word{font-size:54px;}
+  .phono-emoji{font-size:64px;}
+}
+
+/* ── 768px : tablette portrait ── */
+@media(min-width:768px){
+  /* Layout général */
+  .screen{max-width:740px;padding:28px 28px 110px;}
+  .activity-header{padding:20px 28px;}
+  .activity-title{font-size:26px;}
+  .question-card{padding:28px 28px;}
+  /* Accueil */
+  .welcome-name{font-size:32px;}
+  .welcome-sub{font-size:16px;}
+  .section-title{font-size:22px;}
+  /* Modules */
+  .modules-grid{grid-template-columns:repeat(3,1fr);gap:18px;}
+  .module-card{padding:22px 16px 18px;}
+  .module-icon{font-size:48px;}
+  .module-name{font-size:18px;}
+  .module-sub{font-size:12px;}
+  /* QCM */
+  .question-text{font-size:26px;}
+  .answer-btn{font-size:20px;padding:22px;min-height:80px;border-radius:20px;}
+  .answers-grid{gap:14px;}
+  /* Badges — 4 colonnes par catégorie */
+  .badges-grid{grid-template-columns:repeat(4,1fr);gap:14px;}
+  .badge-card{padding:20px 14px;}
+  .badge-emoji{font-size:40px;}
+  .badge-label{font-size:14px;}
+  .badge-desc{font-size:12px;}
+  .badge-cat-title{font-size:18px;}
+  /* Trophées — 2 colonnes */
+  .trophy-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .trophy-char{width:90px;}
+  .trophy-name{font-size:16px;}
+  /* Finish */
+  .finish-card{padding:48px 40px;}
+  .finish-emoji{font-size:90px;}
+  .finish-score{font-size:26px;}
+  .finish-mario-wrap svg{width:120px;height:130px;}
+  /* Parents */
+  .parent-stat-num{font-size:32px;}
+  /* Phonologie */
+  .phono-word{font-size:60px;}
+  .phono-emoji{font-size:70px;}
+  .phono-word-card{padding:28px 24px;}
+  /* Diction */
+  .diction-text{font-size:30px;}
+  .oral-record-btn{width:130px;height:130px;font-size:46px;}
+  /* Story */
+  .story-body{font-size:18px;line-height:2.1;}
+  .story-title-display{font-size:26px;}
+  .story-start-btn{font-size:18px;padding:18px;}
+  /* Nav */
+  .nav-btn{max-width:120px;}
+  .nav-icon{font-size:26px;}
+  .nav-label{font-size:11px;}
+}
+
+/* ── 1024px : tablette paysage / desktop ── */
+@media(min-width:1024px){
+  /* Layout */
+  .screen{max-width:920px;padding:32px 32px 110px;}
+  /* Modules — 3 cols larges */
+  .modules-grid{grid-template-columns:repeat(3,1fr);gap:22px;}
+  .module-card{padding:26px 20px 22px;border-radius:26px;}
+  .module-icon{font-size:52px;}
+  .module-name{font-size:19px;}
+  /* Badges — 5 colonnes */
+  .badges-grid{grid-template-columns:repeat(5,1fr);gap:12px;}
+  .badge-emoji{font-size:36px;}
+  .badge-label{font-size:13px;}
+  .badge-desc{font-size:11px;}
+  /* Trophées — 2 cols larges */
+  .trophy-grid{grid-template-columns:1fr 1fr;gap:20px;}
+  .trophy-card{padding:22px 24px;}
+  .trophy-char{width:100px;}
+  /* QCM */
+  .question-card{padding:32px 36px;}
+  .answer-btn{font-size:21px;padding:24px;}
+  /* Finish */
+  .finish-card{padding:56px 56px;}
+  .finish-mario-wrap svg{width:140px;height:150px;}
+  /* Parents — 2 colonnes pour les cartes */
+  .parent-stats-row{gap:32px;}
+  /* Header */
+  .logo-svg{width:160px;height:44px;}
 }
 </style>
 </head>
@@ -507,7 +612,7 @@ body.offline .offline-banner{display:block}
     <div class="activity-title">🏅 Mes badges</div>
     <div class="progress-wrap"><div class="progress-label" id="badgesSubtitle">Tes exploits !</div></div>
   </div>
-  <div class="badges-grid" id="badgesGrid"></div>
+  <div class="badges-container" id="badgesGrid"></div>
 </div>
 
 <!-- FINISH SCREEN -->
