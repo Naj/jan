@@ -1,0 +1,17 @@
+{
+  "name": "JAN – Jana Active Neurones",
+  "short_name": "JAN",
+  "description": "Application d'apprentissage ludique pour Jana – Grande Section et CP",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFE1F0",
+  "theme_color": "#FF6FA6",
+  "orientation": "any",
+  "lang": "fr",
+  "scope": "/",
+  "icons": [
+    { "src": "/icon-192.svg", "sizes": "192x192", "type": "image/svg+xml", "purpose": "any maskable" },
+    { "src": "/icon-512.svg", "sizes": "512x512", "type": "image/svg+xml", "purpose": "any maskable" }
+  ],
+  "categories": ["education", "kids"]
+}
