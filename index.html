@@ -1127,16 +1127,34 @@ function speak(text,rate){
    SCREENS
 ============================================================ */
 function showScreen(id){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  document.getElementById('floating-back-btn').style.display=(id!=='homeScreen')?'flex':'none';
-  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
-  if(id==='homeScreen'){document.getElementById('navHome').classList.add('active');refreshHomeBadges();}
-  window.scrollTo(0,0);
+  try{
+    document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+    const target=document.getElementById(id);
+    if(target) target.classList.add('active');
+    const fbBtn=document.getElementById('floating-back-btn');
+    if(fbBtn) fbBtn.style.display=(id!=='homeScreen')?'flex':'none';
+    document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+    if(id==='homeScreen'){
+      const nh=document.getElementById('navHome');if(nh)nh.classList.add('active');
+      refreshHomeBadges();
+    }
+    window.scrollTo(0,0);
+  }catch(e){console.error('showScreen error:',e);}
 }
 function goHome(){
-  showScreen('homeScreen');
-  if('speechSynthesis' in window) window.speechSynthesis.cancel();
+  try{
+    if('speechSynthesis' in window) window.speechSynthesis.cancel();
+    showScreen('homeScreen');
+  }catch(e){console.error('goHome error:',e);}
+}
+// Écouter les messages du Service Worker (mise à jour → rechargement auto)
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.addEventListener('message', (e)=>{
+    if(e.data && e.data.type==='SW_UPDATED'){
+      // Attendre 1 s puis recharger pour servir la nouvelle version
+      setTimeout(()=>window.location.reload(), 1000);
+    }
+  });
 }
 function bounceLogo(){
   const svg=document.getElementById('logoSvg');
@@ -1805,7 +1823,16 @@ document.addEventListener('DOMContentLoaded',()=>{
   document.getElementById('starCount').textContent=S.stars;
   document.getElementById('streakPill').textContent='🔥 '+S.streak+' jour'+(S.streak>1?'s':'')+' de suite';
   updateXpBar();checkStreak();refreshHomeBadges();
-  if('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js').catch(()=>{});
+  if('serviceWorker' in navigator){
+    navigator.serviceWorker.register('./sw.js').then(reg=>{
+      reg.addEventListener('updatefound',()=>{
+        const newSW=reg.installing;
+        newSW.addEventListener('statechange',()=>{
+          if(newSW.state==='activated') setTimeout(()=>window.location.reload(),800);
+        });
+      });
+    }).catch(()=>{});
+  }
   if(window.speechSynthesis) window.speechSynthesis.onvoiceschanged=()=>{};
   // L'install PWA est géré par l'IIFE ci-dessus (même principe qu'AIM)
   window.addEventListener('online',()=>document.body.classList.remove('offline'));
