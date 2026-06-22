@@ -1134,6 +1134,10 @@ function showScreen(id){
   if(id==='homeScreen'){document.getElementById('navHome').classList.add('active');refreshHomeBadges();}
   window.scrollTo(0,0);
 }
+function goHome(){
+  showScreen('homeScreen');
+  if('speechSynthesis' in window) window.speechSynthesis.cancel();
+}
 function bounceLogo(){
   const svg=document.getElementById('logoSvg');
   svg.classList.remove('bounce');
